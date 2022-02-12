@@ -16,6 +16,7 @@ pipeline {
 			steps {
 				sh 'mvn --version'
 				sh 'docker version'
+				DOCKERHUB_CREDENTIALS=credentials('jenkins_access_token')
 				echo "Build"
 				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
@@ -23,6 +24,7 @@ pipeline {
 				echo "JOB_NAME - $env.JOB_NAME"
 				echo "BUILD_TAG - $env.BUILD_TAG"
 				echo "BUILD_URL - $env.BUILD_URL"
+
 			}
 		}
 		stage('Compile') {
@@ -52,6 +54,7 @@ pipeline {
 		stage('Build Docker Image') {
 			steps {
 				//"docker build -t in28min/currency-exchange-devops:$env.BUILD_TAG"
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 				script {
 					dockerImage = docker.build("akbar1982/currency-exchange-devops:${env.BUILD_TAG}")
 				}
