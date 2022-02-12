@@ -9,6 +9,7 @@ pipeline {
 		dockerHome = tool 'myDocker'
 		mavenHome = tool 'myMaven'
 		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+		DOCKERHUB_CREDENTIALS=credentials('jenkins_access_token')
 	}
 
 	stages {
@@ -16,8 +17,7 @@ pipeline {
 			steps {
 				sh 'mvn --version'
 				sh 'docker version'
-				DOCKERHUB_CREDENTIALS=credentials('jenkins_access_token')
-				echo "Build"
+			    echo "Build"
 				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
 				echo "BUILD_ID - $env.BUILD_ID"
