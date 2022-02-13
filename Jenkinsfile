@@ -70,7 +70,7 @@ pipeline {
 		stage('Push Docker Image') {
 			steps {
 				script {
-					docker.withRegistry('', 'dockerhub') {
+					docker.withRegistry('', 'jenkins_access_token') {
 						dockerImage.push();
 						dockerImage.push('latest');
 					}
