@@ -53,9 +53,9 @@ pipeline {
         stage('Login') {
 
 			steps {
-				sh "sudo groupadd docker"
-				sh "sudo gpasswd -a jenkins docker"
-				sh "sudo service docker restart"
+				sh "groupadd docker"
+				sh "gpasswd -a jenkins docker"
+				sh "service docker restart"
 			}
 		}
 		stage('Build Docker Image') {
