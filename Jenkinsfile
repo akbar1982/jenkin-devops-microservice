@@ -61,7 +61,7 @@ pipeline {
 				//"docker build -t in28min/currency-exchange-devops:$env.BUILD_TAG"
 
 				script {
-				 dockerImage = docker.build("akbar1982/currency-exchange-devops-example:${env.BUILD_TAG}")
+				 dockerImage = docker.build("akbar1982/currency-exchange-devops:${env.BUILD_TAG}")
 				}
 
 			}
@@ -70,7 +70,7 @@ pipeline {
 		stage('Push Docker Image') {
 			steps {
 				script {
-					docker.withRegistry('', 'jenkins_access_token') {
+					docker.withRegistry('', 'dockerhub') {
 						dockerImage.push();
 						dockerImage.push('latest');
 					}
