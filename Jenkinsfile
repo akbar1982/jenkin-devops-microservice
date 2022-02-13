@@ -50,12 +50,12 @@ pipeline {
 				sh "mvn package -DskipTests"
 			}
 		}
-        stage('Login') {
-
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR'
-			}
-		}
+//         stage('Login') {
+//
+// 			steps {
+// 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR'
+// 			}
+// 		}
 		stage('Build Docker Image') {
 			steps {
 				//"docker build -t in28min/currency-exchange-devops:$env.BUILD_TAG"
